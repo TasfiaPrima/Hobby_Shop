@@ -108,4 +108,4 @@ const deleteOrder = async (req,res) => {
 
 
 
-module.exports={addOrder,getOrder,deleteOrder,checkout};
+module.exports={addOrder,getOrder,deleteOrder,};
