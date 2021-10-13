@@ -71,40 +71,40 @@ const deleteOrder = async (req,res) => {
 }
 
 
-const checkout = async (req,res) => {
-    try{
-        const userId = req.params.userId;n
-        const {source} = req.body;
-        let cart = await Cart.findOne({userId});
-        //let user = await Orders.userId.findOne({_id: userId});
-        //const email = user.email;
-        if(cart){
-            const charge = await stripe.charges.create({
-                amount: cart.bill,
-                currency: 'bdt',
-                source: source,
-                //receipt_email: email
-            })
-            if(!charge) throw Error('Payment failed');
-            if(charge){
-                const order = await Orders.create({
-                    userId,
-                    items: cart.items,
-                    bill: cart.bill
-                });
-                const data = await Cart.findByIdAndDelete({_id:cart.id});
-                return res.status(201).send(order);
-            }
-        }
-        else{
-            res.status(500).send("You do not have items in cart");
-        }
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).send("Something went wrong");
-    }
-}
+// const checkout = async (req,res) => {
+//     try{
+//         const userId = req.params.userId;n
+//         const {source} = req.body;
+//         let cart = await Cart.findOne({userId});
+//         //let user = await Orders.userId.findOne({_id: userId});
+//         //const email = user.email;
+//         if(cart){
+//             const charge = await stripe.charges.create({
+//                 amount: cart.bill,
+//                 currency: 'bdt',
+//                 source: source,
+//                 //receipt_email: email
+//             })
+//             if(!charge) throw Error('Payment failed');
+//             if(charge){
+//                 const order = await Orders.create({
+//                     userId,
+//                     items: cart.items,
+//                     bill: cart.bill
+//                 });
+//                 const data = await Cart.findByIdAndDelete({_id:cart.id});
+//                 return res.status(201).send(order);
+//             }
+//         }
+//         else{
+//             res.status(500).send("You do not have items in cart");
+//         }
+//     }
+//     catch(err){
+//         console.log(err);
+//         res.status(500).send("Something went wrong");
+//     }
+// }
 
 
 
