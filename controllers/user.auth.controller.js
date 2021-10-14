@@ -42,9 +42,9 @@ const postLogin = async (req, res) => {
 };
 
 const postRegister = (req, res) => {
-  const { firstname, lastname, email, password, confirm_password } = req.body;
+  const { firstname, lastname, email, phoneNumber, password, confirm_password } = req.body;
 
-  if (!firstname || !lastname || !email || !password || !confirm_password) {
+  if (!firstname || !lastname || !email ||!phoneNumber|| !password || !confirm_password) {
     return res.status(401).json({
       success: false,
       message: " All fields are required!",
@@ -54,7 +54,7 @@ const postRegister = (req, res) => {
   if (password.length < 8) {
     return res.status(401).json({
       success: false,
-      message: " Password must be at least 6 characters!",
+      message: " Password must be at least 8 characters!",
     });
   }
   if (password !== confirm_password) {
@@ -86,10 +86,12 @@ const postRegister = (req, res) => {
                 message: "problem with hashing",
               });
             } else {
+              
               const newUser = new User({
                 firstname,
                 lastname,
                 email,
+                phoneNumber,
                 password: hash,
               });
 
@@ -108,7 +110,8 @@ const postRegister = (req, res) => {
                                   message: " User created",
                                   id: user._id,
                                   name: user.name,
-                                  email: user.email
+                                  email: user.email,
+                                  phoneNumber: user.phoneNumber,
                               }
                           });
                       });
@@ -136,11 +139,9 @@ user=await User.findById(req.params.userId);
   console.log(err);
   res.status(500).send("Something went wrong");
 }
-console.log(user.notifications);
 user.notifications.forEach((notification) => {
   notification.seen = true;
 });
-console.log(user.notifications);
 
 try{
   user.markModified('notifications')
@@ -149,12 +150,11 @@ try{
     console.log(err);
     res.status(500).send("Something went wrong");
   }
-  console.log(user.notifications);
-  console.log(user);
 
   return res.status(200).json({ success:true, message:'Notification seen' });
 
 }
+
 
 module.exports = {
   postRegister,
