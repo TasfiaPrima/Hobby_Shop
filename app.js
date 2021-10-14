@@ -6,6 +6,7 @@ const productsRoutes = require("./routes/products.routes");
 const cartRoutes = require("./routes/cart.routes");
 const orderRoutes = require("./routes/orders.routes");
 const reviewRoutes = require("./routes/r&r.routes");
+const wishlistRoutes = require("./routes/wishlist.routes");
 
 
 const mongoose = require("mongoose");
@@ -36,5 +37,6 @@ app.use(productsRoutes);
 app.use(cartRoutes);
 app.use(orderRoutes);
 app.use(reviewRoutes);
+app.use(wishlistRoutes);
 
 module.exports = app;

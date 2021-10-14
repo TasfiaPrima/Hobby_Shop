@@ -37,13 +37,13 @@ const getAProduct= async(req,res)=>{
 const deleteProducts= async(req,res)=>{
     let products
     try{
-         await Products.findByIdAndRemove(req.body.id);
+         products=await Products.findByIdAndRemove(req.params.id);
     }catch(err){
         console.log(err);
         return res.status(504).json({success: false, message:'deleting Products failed'});
     }
 
-    return res.status(200).json({ success:true, message:'Product deleted'});
+    return res.status(200).json({ success:true, message:'Product deleted',products});
 }
 
 const updateProducts= async(req,res)=>{

@@ -127,7 +127,37 @@ const postRegister = (req, res) => {
   });
 };
 
+
+const updateNotifications=async(req,res) => {
+let user
+try{
+user=await User.findById(req.params.userId);
+}catch(err) {
+  console.log(err);
+  res.status(500).send("Something went wrong");
+}
+console.log(user.notifications);
+user.notifications.forEach((notification) => {
+  notification.seen = true;
+});
+console.log(user.notifications);
+
+try{
+  user.markModified('notifications')
+  await user.save()
+  }catch(err) {
+    console.log(err);
+    res.status(500).send("Something went wrong");
+  }
+  console.log(user.notifications);
+  console.log(user);
+
+  return res.status(200).json({ success:true, message:'Notification seen' });
+
+}
+
 module.exports = {
   postRegister,
   postLogin,
+  updateNotifications,
 };

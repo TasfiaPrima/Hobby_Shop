@@ -1,4 +1,4 @@
-//const User = require('../models/User.model');
+const User= require('../models/user.model');
 const Orders = require('../models/Orders.model');
 const Cart = require('../models/Cart.model');
 const Products = require('../models/Products.model');
@@ -37,6 +37,25 @@ const addOrder = async (req,res) => {
         const id=products.productId
         const quantity=products.quantity
         const name = actualProduct.productName;
+
+        let user
+        try{
+          user= await User.findById(userId);
+
+        }catch(err){ 
+            console.log(err);
+            res.status(500).send("Something went wrong");
+        };
+        
+        user.notifications.push({message:'your order has been created',seen:false});
+
+        try{
+await user.save()
+        }catch(err){ 
+            console.log(err);
+            res.status(500).send("Something went wrong");
+        };
+
         try{
             const newOrders = await Orders.create({
                 userId,

@@ -38,7 +38,7 @@ const ProductSchema = new mongoose.Schema({
   },
   ratings: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    //required: true,
     ref: 'Review',
   },
 },
