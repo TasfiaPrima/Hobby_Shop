@@ -71,6 +71,13 @@ const postRegister = (req, res) => {
         success: false,
         message: "User already exists with this email",
       });
+    }else {
+      User.findOne({ phoneNumber: phoneNumber }).then((user) => {
+        if(user){
+      return res.status(500).json({
+        success: false,
+        message: "User already exists with this phone number",
+      });
     } else {
       bcrypt.genSalt(10, (err, salt) => {
         if (err) {
@@ -129,6 +136,10 @@ const postRegister = (req, res) => {
     }
   });
 };
+});
+}
+
+
 
 
 const updateNotifications=async(req,res) => {

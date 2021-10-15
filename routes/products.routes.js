@@ -10,6 +10,7 @@ router.delete("/products/:id", controller.deleteProducts);
 router.put("/products/:id", controller.updateProducts);
 
 
+
 router.post("/category", catController.createCategory);
 router.get("/category", catController.getCategory);
 router.get("/category/:id", catController.getACategory);

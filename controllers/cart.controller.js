@@ -31,8 +31,8 @@ const addCartProducts = async (req,res) => {
             res.status(404).send('products not found!')
         }
         const price = actualProduct.price;
-        const id=products.productId
-        const quantity=products.quantity
+        const id=products.productId;
+        const quantity=products.quantity;
         const name = actualProduct.productName;
         try{
             const newCart = await Cart.create({

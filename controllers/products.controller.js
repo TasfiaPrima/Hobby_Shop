@@ -57,4 +57,5 @@ const updateProducts= async(req,res)=>{
     return res.status(200).json({ success:true, message:'Product updated',products});
 }
 
-module.exports={createProducts,getProducts,getAProduct,deleteProducts,updateProducts};
+
+module.exports={createProducts,getProducts,getAProduct,deleteProducts,updateProducts,};

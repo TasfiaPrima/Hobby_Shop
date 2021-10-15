@@ -36,9 +36,9 @@ const ProductSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  ratings: {
+  review: {
     type: mongoose.Schema.Types.ObjectId,
-    //required: true,
+    required: true,
     ref: 'Review',
   },
 },
